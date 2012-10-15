@@ -1,0 +1,13 @@
+Location:-
+C:\WINDOWS\MSAGENT\chars
+
+1.Merlin
+2.Genie
+3.Peedy
+4.Robby
+
+Commands:-
+http://msdn.microsoft.com/en-us/library/ms695930%28v=vs.85%29.aspx
+Agents:-
+http://rainbow.arch.scriptmania.com/merlin/msagents_download.html
+
