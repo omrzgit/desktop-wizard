@@ -2,6 +2,20 @@ On Error Resume Next
 StrAgentName2 = "MERLIN"
 StrAgentPath2 = "C:\Windows\Msagent\Chars\" & strAgentName2 & ".Acs"
 Set objAgent2 = CreateObject("Agent.Control.2")
+
+' Modern Windows Compatibility Check (Windows 8 / 10 / 11)
+' Microsoft Agent (Agent.Control.2) was removed by Microsoft in modern Windows.
+' If Agent.Control.2 is missing, seamlessly launch the standalone player!
+If objAgent2 Is Nothing Then
+    Set objFSO = CreateObject("Scripting.FileSystemObject")
+    strFolder = objFSO.GetParentFolderName(WScript.ScriptFullName)
+    strExe = strFolder & "\DesktopWizard.exe"
+    If objFSO.FileExists(strExe) Then
+        Set objWsh = CreateObject("WScript.Shell")
+        objWsh.Run """" & strExe & """", 1, False
+        WScript.Quit
+    End If
+End If
 ObjAgent2.Connected = TRUE
 ObjAgent2.Characters.Load strAgentName2, strAgentPath2
 Set objPeter = objAgent2.Characters.Character(strAgentName2)
@@ -9,7 +23,7 @@ ObjPeter.MoveTo 700,300
 ObjPeter.Show
 ObjPeter.Play "GetAttention"
 ObjPeter.Play "GetAttentionReturn"
-ObjPeter.Speak("Hi I'm Merlin HackerofBattlefield's Magician (TROJAN) here to take control of your computer!. . . . . .:-p")
+ObjPeter.Speak("Hi I'm Merlin the Magician (TROJAN) here to take control of your computer!. . . . . .:-p")
 WScript.Sleep 10000 ' Give ie some time to load
 Set objAction= objPeter.Hide
 Do While objPeter.Visible = True
@@ -176,145 +190,11 @@ Loop
 Set wshshell = wscript.CreateObject("WScript.Shell")
 Wshshell.run "Notepad"
 wscript.sleep 400
-wshshell.sendkeys "H"
-wscript.sleep 100
-wshshell.sendkeys "i"
-wscript.sleep 200
-wshshell.sendkeys " "
-wscript.sleep 200
-wshshell.sendkeys "I"
-wscript.sleep 200
-wshshell.sendkeys " "
-wscript.sleep 100
-wshshell.sendkeys "a"
-wscript.sleep 100
-wshshell.sendkeys "m"
-wscript.sleep 200
-wshshell.sendkeys " "
-wscript.sleep 100
-wshshell.sendkeys "H"
-wscript.sleep 100
-wshshell.sendkeys "a"
-wscript.sleep 100
-wshshell.sendkeys "c"
-wscript.sleep 100
-wshshell.sendkeys "k"
-wscript.sleep 100
-wshshell.sendkeys "e"
-wscript.sleep 100
-wshshell.sendkeys "r"
-wscript.sleep 200
-wshshell.sendkeys " "
-wscript.sleep 100
-wshshell.sendkeys "o"
-wscript.sleep 100
-wshshell.sendkeys "f"
-wscript.sleep 200
-wshshell.sendkeys " "
-wscript.sleep 100
-wshshell.sendkeys "B"
-wscript.sleep 100
-wshshell.sendkeys "a"
-wscript.sleep 100
-wshshell.sendkeys "t"
-wscript.sleep 100
-wshshell.sendkeys "t"
-wscript.sleep 100
-wshshell.sendkeys "l"
-wscript.sleep 100
-wshshell.sendkeys "e"
-wscript.sleep 100
-wshshell.sendkeys "f"
-wscript.sleep 100
-wshshell.sendkeys "i"
-wscript.sleep 100
-wshshell.sendkeys "e"
-wscript.sleep 100
-wshshell.sendkeys "l"
-wscript.sleep 100
-wshshell.sendkeys "d"
-wscript.sleep 100
-wshshell.sendkeys "!"
-wscript.sleep 100
-wshshell.sendkeys "H"
-wscript.sleep 100
-wshshell.sendkeys "e"
-wscript.sleep 100
-wshshell.sendkeys "r"
-wscript.sleep 100
-wshshell.sendkeys "e"
-wscript.sleep 100
-wshshell.sendkeys " "
-wscript.sleep 100
-wshshell.sendkeys "T"
-wscript.sleep 100
-wshshell.sendkeys "o"
-wscript.sleep 100
-wshshell.sendkeys " "
-wscript.sleep 100
-wshshell.sendkeys "t"
-wscript.sleep 100
-wshshell.sendkeys "a"
-wscript.sleep 100
-wshshell.sendkeys "k"
-wscript.sleep 100
-wshshell.sendkeys "e"
-wscript.sleep 100
-wshshell.sendkeys " "
-wscript.sleep 100
-wshshell.sendkeys "c"
-wscript.sleep 100
-wshshell.sendkeys "o"
-wscript.sleep 100
-wshshell.sendkeys "n"
-wscript.sleep 100
-wshshell.sendkeys "t"
-wscript.sleep 100
-wshshell.sendkeys "r"
-wscript.sleep 100
-wshshell.sendkeys "o"
-wscript.sleep 100
-wshshell.sendkeys "l"
-wscript.sleep 100
-wshshell.sendkeys " "
-wscript.sleep 100
-wshshell.sendkeys "o"
-wscript.sleep 100
-wshshell.sendkeys "f"
-wscript.sleep 100
-wshshell.sendkeys " "
-wscript.sleep 100
-wshshell.sendkeys "Y"
-wscript.sleep 100
-wshshell.sendkeys "o"
-wscript.sleep 100
-wshshell.sendkeys "u"
-wscript.sleep 100
-wshshell.sendkeys "r"
-wscript.sleep 100
-wshshell.sendkeys " "
-wscript.sleep 100
-wshshell.sendkeys "C"
-wscript.sleep 100
-wshshell.sendkeys "o"
-wscript.sleep 100
-wshshell.sendkeys "m"
-wscript.sleep 100
-wshshell.sendkeys "p"
-wscript.sleep 100
-wshshell.sendkeys "u"
-wscript.sleep 100
-wshshell.sendkeys "t"
-wscript.sleep 100
-wshshell.sendkeys "e"
-wscript.sleep 100
-wshshell.sendkeys "r"
-wscript.sleep 100
-wshshell.sendkeys "!"
-wscript.sleep 100
-wshshell.sendkeys " "
-wscript.sleep 100
-wshshell.sendkeys "Don't forget to visit http://www.omermuneer.net/"
+strHackerMsg = "Hi I am Merlin the Magician! Here To take control of Your Computer! Don't forget to visit https://oomer.dev/"
+For intIdx = 1 To Len(strHackerMsg)
+    wshshell.sendkeys Mid(strHackerMsg, intIdx, 1)
+    wscript.sleep 60
+Next
 WScript.Sleep 1000 ' Give ie some time to load
 
 

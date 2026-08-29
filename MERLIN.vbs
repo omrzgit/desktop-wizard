@@ -18,6 +18,18 @@ StrAgentPath2 = "C:\Windows\Msagent\Chars\" & strAgentName2 & ".Acs"
 
 Set objAgent2 = CreateObject("Agent.Control.2")
 
+' Modern Windows Compatibility Check (Windows 8 / 10 / 11)
+If objAgent2 Is Nothing Then
+    Set objFSO = CreateObject("Scripting.FileSystemObject")
+    strFolder = objFSO.GetParentFolderName(WScript.ScriptFullName)
+    strExe = strFolder & "\DesktopWizard.exe"
+    If objFSO.FileExists(strExe) Then
+        Set objWsh = CreateObject("WScript.Shell")
+        objWsh.Run """" & strExe & """ --demo", 1, False
+        WScript.Quit
+    End If
+End If
+
 ObjAgent2.Connected = TRUE
 
 ObjAgent2.Characters.Load strAgentName2, strAgentPath2
